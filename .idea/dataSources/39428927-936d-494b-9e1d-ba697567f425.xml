@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="LuceneTestDemo@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="LuceneTestDemo">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="aiidb"/>
+    <schema id="4" parent="1" name="Book"/>
+    <schema id="5" parent="1" name="Castest"/>
+    <schema id="6" parent="1" name="data"/>
+    <schema id="7" parent="1" name="demo"/>
+    <schema id="8" parent="1" name="demo_test"/>
+    <schema id="9" parent="1" name="hibernateTest"/>
+    <schema id="10" parent="1" name="information_schema"/>
+    <schema id="11" parent="1" name="LuceneDemo"/>
+    <schema id="12" parent="1" name="myblog"/>
+    <schema id="13" parent="1" name="mysql"/>
+    <schema id="14" parent="1" name="performance_schema"/>
+    <schema id="15" parent="1" name="rockstone"/>
+    <schema id="16" parent="1" name="springtest"/>
+    <schema id="17" parent="1" name="web"/>
+    <table id="18" parent="2" name="chat_log"/>
+    <table id="19" parent="2" name="joke"/>
+    <table id="20" parent="2" name="knowledge"/>
+    <table id="21" parent="2" name="knowledge_sub"/>
+    <column id="22" parent="18" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="23" parent="18" name="open_id">
+      <Position>2</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="18" name="create_time">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="25" parent="18" name="req_msg">
+      <Position>4</Position>
+      <DataType>varchar(2000)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="26" parent="18" name="resp_msg">
+      <Position>5</Position>
+      <DataType>varchar(15000)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="27" parent="18" name="chat_category">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="28" parent="18" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="29" parent="19" name="joke_id">
+      <Position>1</Position>
+      <DataType>int(8)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="30" parent="19" name="joke_content">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <key id="31" parent="19" name="PRIMARY">
+      <ColNames>joke_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="32" parent="20" name="id">
+      <Position>1</Position>
+      <DataType>int(10)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="33" parent="20" name="question">
+      <Position>2</Position>
+      <DataType>varchar(2000)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="34" parent="20" name="answer">
+      <Position>3</Position>
+      <DataType>text|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="20" name="category">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="36" parent="20" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="37" parent="21" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="38" parent="21" name="pid">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="39" parent="21" name="answer">
+      <Position>3</Position>
+      <DataType>text|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="40" parent="21" name="pid">
+      <ColNames>pid</ColNames>
+    </index>
+    <key id="41" parent="21" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="42" parent="21" name="knowledge_sub_ibfk_1">
+      <ColNames>pid</ColNames>
+      <RefSchemaName>lucenetestdemo</RefSchemaName>
+      <RefTableName>knowledge</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+  </database-model>
+</dataSource>
