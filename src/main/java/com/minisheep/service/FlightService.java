@@ -18,7 +18,7 @@ public interface FlightService {
 
     public String StatusCodeToDescription(String statusCode);  // 状态码翻译成描述
 
-    public Integer dircetionCount(String direction);
+    public Integer CountByDirection(String direction);  // 获取进港或出港航班总数
 
     public String flightTaskCodeToCNName(String flightTaskCode); // 任务英文代码转中文
 

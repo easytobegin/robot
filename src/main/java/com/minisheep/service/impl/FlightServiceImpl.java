@@ -1,36 +1,26 @@
 package com.minisheep.service.impl;
 
-import com.minisheep.mapper.FlightMapper;
+import com.minisheep.mapper.aiidbDataSourceMapper.FlightMapper;
 import com.minisheep.model.BaseFlightInfo;
-import com.minisheep.model.Knowledge;
 import com.minisheep.service.FlightService;
-import com.minisheep.service.KnowledgeService;
 import com.minisheep.utils.ToolsUtils;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Created by minisheep on 18/1/8.
  */
 @Service
 public class FlightServiceImpl implements FlightService{
-//    protected static Logger logger = (Logger) LoggerFactory.getLogger(FlightServiceImpl.class);
+//    protected static Logger logger = (Logger) LoggerFactory.getLogger(FlightService.class);
 
     @Autowired
     FlightMapper flightMapper;
 
-    @Override
-    public List<BaseFlightInfo> flightSearch(String flightCode) {
-//        logger.info("这个是查询航班的，航班编号为:" + flightCode);
-        List<BaseFlightInfo> flights = new ArrayList<BaseFlightInfo>();
-        flights = flightMapper.getListAccordingToFlightCode(flightCode);
-
+    private List<BaseFlightInfo> afterRemoveDotZeroOperatorFlights(List<BaseFlightInfo> flights) {  // 返回去除从数据库读取末尾.0的flights信息
         for (int i = 0; i < flights.size(); i++) {
             // 起飞时间(实际、预计、计划)
             flights.get(i).setActualTime((flights.get(i).getActualTime() != null) ? ToolsUtils.removeDotZero(flights.get(i).getActualTime()) : null);
@@ -66,42 +56,54 @@ public class FlightServiceImpl implements FlightService{
     }
 
     @Override
+    public List<BaseFlightInfo> flightSearch(String flightCode) {
+//        logger.info("这个是查询航班的，航班编号为:" + flightCode);
+        List<BaseFlightInfo> flights = new ArrayList<BaseFlightInfo>();
+        flights = flightMapper.getListAccordingToFlightCode(flightCode);
+
+        return afterRemoveDotZeroOperatorFlights(flights);
+    }
+
+    @Override
     public String getIataCodeByCNName(String displayCnName) {
-        return null;
+        return (flightMapper.getIataCodeByCNNameSearch(displayCnName) != null) ? flightMapper.getIataCodeByCNNameSearch(displayCnName) : null;
     }
 
     @Override
     public String getCnNameByIataCode(String iataCode) {
-        return null;
+        return (flightMapper.getCnNameByIatatCodeSearch(iataCode) != null) ? flightMapper.getCnNameByIatatCodeSearch(iataCode) : null;
     }
 
     @Override
     public List<BaseFlightInfo> getFlightListFromDepAndArr(String dep, String arr) {
-        return null;
+        List<BaseFlightInfo> flights = new ArrayList<BaseFlightInfo>();
+        flights = flightMapper.getFlightListFromDepAndArrSearch(dep, arr, dep, arr, dep, arr);
+
+        return afterRemoveDotZeroOperatorFlights(flights);
     }
 
     @Override
     public String StatusCodeToDescription(String statusCode) {
-        return null;
+        return (flightMapper.StatusCodeToDescriptionSearch(statusCode) != null) ? flightMapper.StatusCodeToDescriptionSearch(statusCode) : null;
     }
 
     @Override
-    public Integer dircetionCount(String direction) {
-        return null;
+    public Integer CountByDirection(String direction) {
+        return (flightMapper.directionCountSearch(direction) != null) ? flightMapper.directionCountSearch(direction) : null;
     }
 
     @Override
     public String flightTaskCodeToCNName(String flightTaskCode) {
-        return null;
+        return (flightMapper.flightTaskCodeToCNNameSearch(flightTaskCode) != null) ? flightMapper.flightTaskCodeToCNNameSearch(flightTaskCode) : null;
     }
 
     @Override
     public String companyCodeToCNName(String companyCode) {
-        return null;
+        return (flightMapper.companyCodeToCNNameSearch(companyCode) != null) ? flightMapper.companyCodeToCNNameSearch(companyCode) : null;
     }
 
     @Override
     public String irregularCode(String irrCode) {
-        return null;
+        return (flightMapper.irregularCodeSearch(irrCode) != null) ? flightMapper.irregularCodeSearch(irrCode) : null;
     }
 }
